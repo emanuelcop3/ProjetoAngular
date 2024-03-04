@@ -1,0 +1,31 @@
+import React from 'react';
+
+function SeuComponente({ form, question, isValid }) {
+return (
+<div>
+  <label htmlFor={question.key}>{question.label}</label>
+
+  <div>
+    {question.controlType === 'textbox' && (
+    <input id={question.key} type={question.type} {...form.control(question.key)} />
+    )}
+
+    {question.controlType === 'dropdown' && (
+    <select id={question.key} {...form.control(question.key)}>
+      {question.options.map((opt) => (
+      <option key={opt.key} value={opt.key}>
+        {opt.value}
+      </option>
+      ))}
+    </select>
+    )}
+  </div>
+
+  <div className="errorMessage" style={{ display: !isValid ? 'block' : 'none' }}>
+    {question.label} é obrigatório
+  </div>
+</div>
+);
+}
+
+export default SeuComponente;
